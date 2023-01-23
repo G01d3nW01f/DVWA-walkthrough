@@ -1,3 +1,48 @@
+#SourceCode
+
+```
+<?php
+
+if( isset( $_REQUEST[ 'Submit' ] ) ) {
+    // Get input
+    $id = $_REQUEST[ 'id' ];
+
+    // Check database
+    $query  = "SELECT first_name, last_name FROM users WHERE user_id = '$id';";
+    $result = mysql_query( $query ) or die( '<pre>' . mysql_error() . '</pre>' );
+
+    // Get results
+    $num = mysql_numrows( $result );
+    $i   = 0;
+    while( $i < $num ) {
+        // Get values
+        $first = mysql_result( $result, $i, "first_name" );
+        $last  = mysql_result( $result, $i, "last_name" );
+
+        // Feedback for end user
+        echo "<pre>ID: {$id}<br />First name: {$first}<br />Surname: {$last}</pre>";
+
+        // Increase loop count
+        $i++;
+    }
+
+    mysql_close();
+}
+
+?> 
+```
+
+```
+$query  = "SELECT first_name, last_name FROM users WHERE user_id = '$id';";
+```
+if input the "1' or 1=1-- -"
+```
+$query  = "SELECT first_name, last_name FROM users WHERE user_id = '1' or 1=1-- -';";
+```
+
+
+
+
 
 ![image](https://user-images.githubusercontent.com/75846902/213949910-e16ed004-c048-43aa-9294-e9b617d35435.png)
 
